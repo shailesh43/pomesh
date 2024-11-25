@@ -1,7 +1,5 @@
 'use client';
-
 import TimerComponent from "./components/TimerComponent";
-
 export default function Home() {
 
   return (
