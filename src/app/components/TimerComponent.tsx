@@ -6,7 +6,7 @@ import timerIcon from '../assets/timer.svg'
 import breakIcon from '../assets/break.svg'
 import playIcon from '../assets/play.svg'
 import pauseIcon from '../assets/pause.svg'
-import resetIcon from '../assets/reset.svg' // Assume you have a reset icon
+import resetIcon from '../assets/reset.svg' 
 
 const TimerComponent = () => {
   const [time, setTime] = useState(45 * 60);
