@@ -14,8 +14,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pomesh",
+  title: "Pomeshh",
   description: "Minimal Pomodoro App created by Shailesh",
+  icons: {
+    icon: "./assets/pomesh-icon.svg", // This is relative to the public directory
+  },
 };
 
 export default function RootLayout({
@@ -25,6 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/assets/logo.svg"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
