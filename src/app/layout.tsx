@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Pomeshh",
   description: "Minimal Pomodoro App created by Shailesh",
   icons: {
-    icon: "./assets/pomesh-icon.svg", // This is relative to the public directory
+    icon: "./assets/pomesh-logo.svg", // This is relative to the public directory
   },
 };
 

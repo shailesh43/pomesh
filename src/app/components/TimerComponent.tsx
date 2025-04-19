@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import timerIcon from '../assets/timer.svg'
 import breakIcon from '../assets/break.svg'
 import playIcon from '../assets/play.svg'
 import pauseIcon from '../assets/pause.svg'
-import resetIcon from '../assets/reset.svg' 
+import resetIcon from '../assets/reset.svg'
 
 const TimerComponent = () => {
   const [time, setTime] = useState(45 * 60);
@@ -66,30 +66,43 @@ const TimerComponent = () => {
     setIsRunning(false);
   };
 
+  const clickSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleSoundClick = () => {
+    if (clickSoundRef.current) {
+      clickSoundRef.current.currentTime = 0; // rewind to start
+      clickSoundRef.current.play();
+    }
+    console.log('Button clicked!');
+  };
+
   return (
     <div className="text-center mt-12">
-      <div className="flex justify-center gap-4 mb-4 font-semibold text-xl">
+      <div className="flex justify-center gap-8 mb-2 font-mono text-xl">
         <button
           onClick={handleTimerClick}
-          className={`timer py-1 px-3 rounded-md flex items-center gap-2 ${!isBreakMode ? 'bg-black text-white' : 'none'}`}
+          className={`timer py-2 px-3.5 rounded-full hover:underline underline-offset-4 flex items-center gap-2 ${!isBreakMode ? 'bg-black text-white' : 'none'}`}
         >
           <Image className="images" src={timerIcon} width={25} height={25} quality={100} alt="Timer icon" />
           <div>Timer</div>
         </button>
         <button
           onClick={handleBreakClick}
-          className={`break py-1 px-3 rounded-md flex items-center gap-2 ${isBreakMode ? 'bg-black text-white' : 'none'}`}
+          className={`break py-2 px-3.5 rounded-full hover:underline underline-offset-4 flex items-center gap-2 ${isBreakMode ? 'bg-black text-white' : 'none'}`}
         >
           <Image src={breakIcon} width={25} height={25} quality={100} alt="Break icon" />
           <div>Break</div>
         </button>
       </div>
       <div>
-        <h1 className="text-8xl font-bold">{formatTime()}</h1>
+        <h1 className="text-[180px] font-bold">{formatTime()}</h1>
       </div>
-      <div className="mt-4 flex justify-center items-center gap-4 ">
+      <div className="mt-2 flex justify-center items-center gap-4 ">
         <button
-          onClick={toggleTimer}
+          onClick={() => {
+            toggleTimer();
+            handleSoundClick();
+          }}
           disabled={time === 0}
           className={`${time === 0 ? 'playAndpause py-1 px-8 rounded-lg cursor-not-allowed opacity-50' : 'playAndpause py-1 px-8 rounded-lg cursor-pointer'}`}
         >
@@ -100,6 +113,7 @@ const TimerComponent = () => {
             height={50}
             className={time === 0 ? 'opacity-50' : ''}
           />
+          <audio ref={clickSoundRef} src="/click.mp3" preload="auto" />
         </button>
         {isRunning && (
           <button onClick={resetTimer} className="cursor-pointer reset">
