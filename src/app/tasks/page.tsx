@@ -1,7 +1,6 @@
 // src/components/Tasks.tsx
 'use client';
 import React, { useState, useEffect } from 'react';
-import { PlusCircle, Trash, Edit, Save, X, Check } from 'lucide-react';
 
 // Define the Todo type
 interface Todo {
@@ -110,9 +109,9 @@ const Tasks: React.FC = () => {
         />
         <button 
           type="submit" 
-          className="flex items-center justify-center px-4 ml-2 bg-gray-800 text-white  rounded-full hover:bg-gray-700 transition-colors"
+          className="flex items-center justify-center px-4 ml-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition-colors"
         >
-          <PlusCircle size={20} />
+          <span className="text-xl">+</span>
         </button>
       </form>
       
@@ -140,13 +139,13 @@ const Tasks: React.FC = () => {
                     onClick={() => saveEdit(todo.id)}
                     className="p-1 text-green-600 hover:text-green-800"
                   >
-                    <Save size={18} />
+                    <span className="text-lg">💾</span>
                   </button>
                   <button 
                     onClick={cancelEditing}
                     className="p-1 text-red-600 hover:text-red-800 ml-1"
                   >
-                    <X size={18} />
+                    <span className="text-lg">✕</span>
                   </button>
                 </div>
               ) : (
@@ -154,9 +153,9 @@ const Tasks: React.FC = () => {
                 <>
                   <button 
                     onClick={() => toggleComplete(todo.id)}
-                    className={`p-1 mr-2 rounded-full border ${todo.completed ? 'bg-green-500 text-white border-green-500' : 'border-gray-300'}`}
+                    className={`p-1 mr-2 rounded-full border ${todo.completed ? 'px-3.5 bg-green-600 text-white border-green-500' : 'border-gray-300'}`}
                   >
-                    {todo.completed && <Check size={14} />}
+                    {todo.completed && <span className="text-xs">✓</span>}
                   </button>
                   <span className={`flex-grow ${todo.completed ? 'line-through text-gray-500' : ''}`}>
                     {todo.text}
@@ -165,13 +164,13 @@ const Tasks: React.FC = () => {
                     onClick={() => startEditing(todo)}
                     className="p-1 text-blue-600 hover:text-blue-800 ml-1"
                   >
-                    <Edit size={18} />
+                    <span className="text-lg">✎</span>
                   </button>
                   <button 
                     onClick={() => deleteTodo(todo.id)}
                     className="p-1 text-red-600 hover:text-red-800 ml-1"
                   >
-                    <Trash size={18} />
+                    <span className="text-lg">🗑️</span>
                   </button>
                 </>
               )}
